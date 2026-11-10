@@ -9,7 +9,7 @@
 <meta property="og:description" content="1 yilda 1800 ta yangi o'quvchi olib kelgan tizim — 10 bosqich va 6 ta amaliy qo'llanmada.">
 <script>
   /* ====== FAQAT SHU IKKI QATORNI O'ZGARTIRING ====== */
-  var TG_LINK  = "https://t.me/KITOBCHA_HAVOLASI"; // Kitobcha beriladigan Telegram havola (bot yoki kanal)
+  var TG_LINK  = "https://t.me/raimbaev_elmurod/1948"; // Kitobcha joylangan Telegram post
   var PIXEL_ID = "1810481153424905";               // Meta Pixel ID (bepul dars landingi bilan bir xil)
   /* ================================================ */
 
@@ -120,10 +120,12 @@
   function openTelegram(){
     var android = /Android/i.test(navigator.userAgent);
     var mobile  = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (!HASH || !mobile) { location.href = TG_LINK; return; }
+    var POST = TG_LINK.match(/t\.me\/([A-Za-z0-9_]{4,})\/(\d+)/);   // ochiq kanal posti
+    if (!mobile || (!HASH && !POST)) { location.href = TG_LINK; return; }
+    var path = HASH ? 'join?invite=' + HASH : 'resolve?domain=' + POST[1] + '&post=' + POST[2];
     var deep = android
-      ? 'intent://join?invite=' + HASH + '#Intent;scheme=tg;S.browser_fallback_url=' + encodeURIComponent(TG_LINK) + ';end'
-      : 'tg://join?invite=' + HASH;
+      ? 'intent://' + path + '#Intent;scheme=tg;S.browser_fallback_url=' + encodeURIComponent(TG_LINK) + ';end'
+      : 'tg://' + path;
     var fb = setTimeout(function(){ if (!document.hidden) location.href = TG_LINK; }, 1500);
     document.addEventListener('visibilitychange', function(){ if (document.hidden) clearTimeout(fb); });
     window.addEventListener('pagehide', function(){ clearTimeout(fb); });
