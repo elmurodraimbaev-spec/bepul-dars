@@ -27,6 +27,7 @@
 
 const CHANNEL     = "@raimbaev_elmurod";
 const CHANNEL_URL = "https://t.me/raimbaev_elmurod";
+const JOIN_URL    = "https://t.me/+a3Lm4aeHCfVhMzUy";   // kanalning "Bot" taklif havolasi (Telegram'da alohida sanaladi)
 const ADMIN_ID    = 669243496;
 const DEFAULT_OFFER = "video";
 
@@ -124,7 +125,7 @@ async function handle(upd, env) {
   return tg(env, "sendMessage", {
     chat_id: uid, parse_mode: "HTML", text: T.gate(offers[offerKey]),
     reply_markup: { inline_keyboard: [
-      [{ text: "📢 Kanalga obuna bo'lish", url: CHANNEL_URL }],
+      [{ text: "📢 Kanalga obuna bo'lish", url: JOIN_URL }],
       [{ text: "✅ Obuna bo'ldim", callback_data: "c:" + offerKey }],
     ] },
   });
