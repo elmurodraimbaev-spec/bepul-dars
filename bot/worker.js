@@ -32,7 +32,22 @@ const DEFAULT_OFFER = "video";
 
 // Koddagi takliflar (admin /setoffer bilan yangilarini qo'sha oladi)
 const OFFERS = {
-  video:    { post: 1951, title: "«Xususiy maktabga o'quvchi yig'ish» bepul video darsligi" },
+  video: {
+    post: 1951,
+    title: "«Xususiy maktabga o'quvchi yig'ish» bepul video darsligi",
+    // text bo'lsa, kanal posti nusxalanmaydi — shu matn yuboriladi
+    preview: "https://www.youtube.com/watch?v=RgosTPt90Mg",
+    text:
+      "🎬 <b>Xususiy maktabga o'quvchi yig'ish — bepul video darslik</b>\n\n" +
+      "▶️ <a href=\"https://www.youtube.com/watch?v=RgosTPt90Mg\">Videoni ko'rish</a>\n\n" +
+      "<b>Videoda nimalar bor:</b>\n" +
+      "▫️ Bir yilda 1800 ta yangi o'quvchi qanday yig'ilgani — tizim boshidan oxirigacha\n" +
+      "▫️ Raqobatchilarni tahlil qilish va ota-onalar bilan CustDev o'tkazish\n" +
+      "▫️ Qabulni har kuni raqamlar bilan boshqarish: plan-fakt va sinflar bo'yicha kalendar\n" +
+      "▫️ Qaysi kanallar o'quvchi olib keldi, qaysilari ishlamadi\n\n" +
+      "🎁 Qo'shimcha: «Xususiy maktabga marketing strategiyasi tuzish» kitobchasi — " +
+      "<a href=\"https://t.me/raimbaev_elmurod/1948\">shu yerda</a>.",
+  },
   kitobcha: { post: 1948, title: "«Xususiy maktabga marketing strategiyasi tuzish» kitobchasi" },
 };
 
@@ -126,8 +141,16 @@ async function deliver(env, uid, offerKey) {
   const offers = await getOffers(env);
   const o = offers[offerKey] || offers[DEFAULT_OFFER];
   await tg(env, "sendMessage", { chat_id: uid, text: T.before });
-  const r = await tg(env, "copyMessage", { chat_id: uid, from_chat_id: CHANNEL, message_id: o.post });
-  if (!r.ok) await tg(env, "sendMessage", { chat_id: uid, text: `${CHANNEL_URL}/${o.post}` });
+  let r;
+  if (o.text) {
+    r = await tg(env, "sendMessage", {
+      chat_id: uid, parse_mode: "HTML", text: o.text,
+      link_preview_options: o.preview ? { url: o.preview, prefer_large_media: true } : { is_disabled: true },
+    });
+  } else {
+    r = await tg(env, "copyMessage", { chat_id: uid, from_chat_id: CHANNEL, message_id: o.post });
+  }
+  if (!r.ok) { console.log("deliver failed", JSON.stringify(r)); await tg(env, "sendMessage", { chat_id: uid, text: `${CHANNEL_URL}/${o.post}` }); }
   await tg(env, "sendMessage", { chat_id: uid, text: T.after });
   await markGot(env, uid, offerKey);
 }
