@@ -54,12 +54,13 @@ const OFFERS = {
 const T = {
   gate: o =>
     "👋 Assalomu alaykum!\n\n" +
+    "Bu bot orqali <b>xususiy maktab va o'quv markaz marketingiga oid</b> bepul materiallarni olasiz.\n\n" +
     `🎁 <b>${esc(o.title)}</b> — kanal obunachilari uchun.\n\n` +
     "1️⃣ Kanalga obuna bo'ling\n" +
     "2️⃣ «✅ Obuna bo'ldim» tugmasini bosing — material darhol keladi.",
   notYet: "Hali obuna bo'lmagansiz. Avval kanalga qo'shiling, keyin qayta bosing 🙂",
   before: "🎉 Rahmat! Mana 👇",
-  after: "Kanalda xususiy maktab marketingi bo'yicha shunday materiallar muntazam chiqadi — kanalni o'chirib qo'ymang 🔔",
+  after: "Kanalda xususiy maktab va o'quv markaz marketingiga oid shunday materiallar muntazam chiqadi — kanalni o'chirib qo'ymang 🔔",
 };
 
 export default {
