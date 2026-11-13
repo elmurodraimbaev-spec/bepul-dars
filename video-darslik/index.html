@@ -9,7 +9,7 @@
 <meta property="og:description" content="Noldan 4200+ o'quvchigacha. 1 yilda 1800 ta yangi o'quvchi olib kelgan tizim.">
 <script>
   /* ====== FAQAT SHU IKKI QATORNI O'ZGARTIRING ====== */
-  var TG_LINK  = "https://t.me/raimbaev_elmurod/1951"; // Video darslik turgan Telegram post
+  var TG_LINK  = "https://t.me/Raimbayevelmurodbot?start=video-landing"; // Bot: obuna tekshiruvi → video darslik
   var PIXEL_ID = "1810481153424905";                 // Meta Pixel ID (kitobcha bilan bir xil)
   /* ================================================ */
 
@@ -93,9 +93,12 @@
     var android = /Android/i.test(navigator.userAgent);
     var mobile  = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     var POST = TG_LINK.match(/t\.me\/([A-Za-z0-9_]{4,})\/(\d+)/);
+    var BOT  = TG_LINK.match(/t\.me\/([A-Za-z0-9_]{4,})\?start=([\w-]+)/);
     var CH   = TG_LINK.match(/t\.me\/([A-Za-z0-9_]{4,})\/?$/);
-    if (!mobile || (!POST && !CH)) { location.href = TG_LINK; return; }
-    var path = POST ? 'resolve?domain=' + POST[1] + '&post=' + POST[2] : 'resolve?domain=' + CH[1];
+    if (!mobile || (!POST && !BOT && !CH)) { location.href = TG_LINK; return; }
+    var path = POST ? 'resolve?domain=' + POST[1] + '&post=' + POST[2]
+             : BOT  ? 'resolve?domain=' + BOT[1] + '&start=' + BOT[2]
+             : 'resolve?domain=' + CH[1];
     var deep = android
       ? 'intent://' + path + '#Intent;scheme=tg;S.browser_fallback_url=' + encodeURIComponent(TG_LINK) + ';end'
       : 'tg://' + path;
