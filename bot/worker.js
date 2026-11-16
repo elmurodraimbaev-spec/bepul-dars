@@ -6,6 +6,7 @@
  *     https://t.me/<bot>?start=video            → video darslik
  *     https://t.me/<bot>?start=kitobcha         → kitobcha
  *     https://t.me/<bot>?start=video-landing    → video darslik, manba "landing"
+ *     https://t.me/<bot>?start=strategiya-landing → «0 dan marketing strategiyasi» video, manba "landing"
  * Havola formati:  start=<taklif>[-<manba>]   (faqat harf, raqam, _ va -)
  *
  * Ishlash tartibi:
@@ -50,6 +51,21 @@ const OFFERS = {
       "<a href=\"https://t.me/raimbaev_elmurod/1948\">shu yerda</a>.",
   },
   kitobcha: { post: 1948, title: "«Xususiy maktabga marketing strategiyasi tuzish» kitobchasi" },
+  strategiya: {
+    post: 1948,
+    title: "«0 dan marketing strategiyasi tuzish» bepul video darsligi",
+    preview: "https://www.youtube.com/watch?v=GqbNQrQZgDQ",
+    text:
+      "🎬 <b>0 dan marketing strategiyasi tuzish — bepul video darslik</b>\n\n" +
+      "▶️ <a href=\"https://youtu.be/GqbNQrQZgDQ\">Videoni ko'rish</a>\n\n" +
+      "<b>Videoda nimalar bor:</b>\n" +
+      "▫️ Marketing strategiyasini tuzishning 11 ta bosqichi — to'g'ri ketma-ketlikda\n" +
+      "▫️ Real keys: Registon maktabining Buxoro bozoriga kirib borishi\n" +
+      "▫️ Har bir bosqich nazariya emas, shu keys misolida ko'rsatilgan\n\n" +
+      "Strategiya tuzish uchun 10 yillik tajriba shart emas — to'g'ri ketma-ketlikni bilish kifoya.\n\n" +
+      "🎁 Qo'shimcha: «Xususiy maktabga marketing strategiyasi tuzish» kitobchasi — " +
+      "<a href=\"https://t.me/raimbaev_elmurod/1948\">shu yerda</a>.",
+  },
 };
 
 const T = {
