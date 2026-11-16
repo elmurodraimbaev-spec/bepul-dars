@@ -23,68 +23,71 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&family=Montserrat:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap">
 <style>
   *{box-sizing:border-box}
-  html,body{margin:0;background:#FBF8F1;color:#141414;font-family:Montserrat,sans-serif}
-  .wrap{max-width:560px;margin:0 auto;padding:22px 20px 40px;position:relative}
-  .blob{position:fixed;top:-180px;right:-160px;width:460px;height:460px;border-radius:50%;background:#FFE24A;opacity:.5;filter:blur(8px);pointer-events:none}
-  .me{display:flex;align-items:center;gap:12px;position:relative}
-  .av{width:44px;height:44px;border-radius:50%;background:#141414;color:#FFE24A;display:flex;align-items:center;justify-content:center;font-weight:800}
-  .me b{display:block;font-size:16px}.me span{font-size:13px;color:#6b6b6b;font-weight:600}
-  .tag{display:inline-flex;align-items:center;gap:8px;margin-top:34px;background:#141414;color:#FFE24A;font-weight:800;font-size:13px;letter-spacing:.6px;padding:9px 14px;border-radius:8px;position:relative}
-  h1{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(36px,10vw,52px);line-height:1.05;letter-spacing:-1.5px;margin:18px 0 0;position:relative}
-  .hl{background:linear-gradient(transparent 58%,#FFE24A 58%,#FFE24A 92%,transparent 92%);padding:0 4px;margin:0 -4px}
-  .sub{font-size:18px;line-height:1.5;font-weight:500;color:#3d3d3d;margin:16px 0 0}
-  .sub b{color:#141414}
-  .vid{display:block;margin-top:26px;border-radius:20px;background:#141414;padding:12px 12px 16px;box-shadow:0 20px 50px rgba(40,30,0,.2);text-decoration:none;position:relative}
-  .scr{aspect-ratio:16/9;border-radius:12px;background:radial-gradient(circle at 70% 30%,rgba(255,226,74,.28),transparent 60%),#1f1f1f;display:flex;align-items:center;justify-content:center;position:relative}
-  .scr .t{position:absolute;left:16px;top:14px;right:16px;color:#fff;font-family:Poppins;font-weight:800;font-size:clamp(15px,4.4vw,20px);line-height:1.15}
-  .pb{width:78px;height:78px;border-radius:50%;background:#FFE24A;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(255,226,74,.18);margin-top:18px}
-  .pb svg{width:32px;height:32px;margin-left:5px}
-  .tr{margin:14px 4px 0;height:6px;border-radius:3px;background:#3a3a3a;position:relative}
-  .tr i{position:absolute;left:0;top:0;bottom:0;width:36%;border-radius:3px;background:#FFE24A}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-  .st{background:#fff;border:2px solid #ECE6D6;border-radius:16px;padding:14px 12px}
-  .st .v{font-family:Poppins;font-weight:800;font-size:clamp(22px,6.5vw,30px);letter-spacing:-1px;line-height:1}
-  .st .k{font-size:12px;font-weight:600;color:#555;margin-top:6px;line-height:1.3}
-  .st.y{background:#FFE24A;border-color:#FFE24A}.st.y .k{color:#2a2a2a}
-  .cta{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px;background:#141414;color:#fff;text-decoration:none;
-    font-family:Poppins;font-weight:800;font-size:21px;padding:20px 24px;border-radius:14px;box-shadow:0 8px 0 #FFE24A;
-    -webkit-tap-highlight-color:transparent;transition:transform .15s ease}
-  .cta:active,.vid:active{transform:scale(.98)}
-  .cta svg{width:26px;height:26px}
-  .ok{text-align:center;margin-top:18px;font-size:14px;font-weight:600;color:#6b6b6b}
-  .ft{text-align:center;margin-top:34px;font-size:12px;font-weight:600;color:#9a9a9a}
-  .scr.ph{overflow:hidden;background:#1f1f1f}
-  .scr.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .scr.ph .pb{position:absolute;right:14px;bottom:14px;margin-top:0;width:60px;height:60px;box-shadow:0 0 0 9px rgba(255,226,74,.25)}
-  .scr.ph .pb svg{width:26px;height:26px}
-  .case{margin-top:14px;background:#fff;border:2px solid #ECE6D6;border-left:6px solid #FFE24A;border-radius:16px;padding:16px 16px 16px 18px}
-  .case .ck{font-size:11px;font-weight:800;letter-spacing:1px;color:#8a7a2a}
-  .case b{display:block;font-family:Poppins;font-weight:800;font-size:18px;line-height:1.25;margin-top:6px}
+  :root{--blue:#1638D4;--ink:#111;--bg:#EEEEEC}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,sans-serif}
+  .wrap{max-width:560px;margin:0 auto;padding:22px 20px 40px;position:relative;overflow:hidden}
+  .logo{font-weight:800;font-size:15px;line-height:1.05;letter-spacing:.4px}
+  .logo i{color:var(--blue);font-style:normal}
+  .tag{display:inline-block;margin-top:30px;font-weight:800;font-size:13px;letter-spacing:1.2px;color:var(--blue)}
+  .tag:before{content:"";display:inline-block;width:26px;height:3px;background:var(--ink);vertical-align:middle;margin-right:10px}
+  h1{margin:14px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;font-weight:800;letter-spacing:-1px;line-height:1}
+  h1 .p{font-size:clamp(34px,9.6vw,48px)}
+  h1 .bx{font-size:clamp(32px,9vw,46px);border:3px solid var(--ink);background:#fff;padding:4px 14px 9px}
+  h1 .bar{font-size:clamp(30px,8.6vw,44px);font-weight:900;letter-spacing:0;background:var(--blue);color:#fff;padding:8px 16px 11px;transform:rotate(-1.5deg);margin-top:4px;white-space:nowrap}
+  .sub{font-size:17px;line-height:1.55;font-weight:500;color:#3a3a3a;margin:22px 0 0}
+  .sub b{color:var(--ink);font-weight:700}
+  .vwrap{position:relative;margin-top:30px}
+  .vwrap:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--blue);right:-120px;top:-24px}
+  .vid{display:block;position:relative;border:3px solid var(--ink);background:#fff;padding:8px;text-decoration:none}
+  .scr{aspect-ratio:16/9;position:relative;overflow:hidden;background:#1f1f1f}
+  .scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .pb{position:absolute;right:12px;bottom:12px;width:58px;height:58px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(22,56,212,.3)}
+  .pb svg{width:24px;height:24px;margin-left:4px}
+  .stats{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+  .st{background:#fff;border:3px solid var(--ink);padding:14px 12px}
+  .st .v{font-weight:900;font-size:clamp(26px,7.5vw,34px);letter-spacing:-1px;line-height:1}
+  .st .k{font-size:12px;font-weight:600;color:#444;margin-top:6px;line-height:1.3}
+  .st.b{background:var(--blue);border-color:var(--blue);color:#fff}.st.b .k{color:#dfe5ff}
+  .case{margin-top:12px;background:#fff;border:3px solid var(--ink);border-left:10px solid var(--blue);padding:16px 16px 16px 18px}
+  .case .ck{font-size:11px;font-weight:800;letter-spacing:1.4px;color:var(--blue)}
+  .case b{display:block;font-weight:800;font-size:18px;line-height:1.25;margin-top:6px}
   .case span{display:block;font-size:14px;font-weight:500;color:#555;line-height:1.45;margin-top:6px}
+  .q{display:flex;align-items:center;gap:16px;margin-top:30px}
+  .q .l{flex:1;font-weight:700;font-size:17px;line-height:1.3}
+  .q .l b{display:block;font-weight:900;font-size:30px;letter-spacing:-.5px;margin-top:2px}
+  .q .m{font-weight:900;font-size:76px;line-height:.8;color:var(--blue)}
+  .cta{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;background:var(--blue);color:#fff;text-decoration:none;
+    font-weight:800;font-size:21px;padding:20px 24px;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);
+    -webkit-tap-highlight-color:transparent;transition:transform .15s ease,box-shadow .15s ease}
+  .cta:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
+  .vid:active{transform:scale(.98)}
+  .cta svg{width:26px;height:26px}
+  .ok{text-align:center;margin-top:20px;font-size:13px;font-weight:600;color:#666}
+  .ft{text-align:center;margin-top:34px;font-size:12px;font-weight:600;color:#999}
 </style>
 </head>
 <body>
-<div class="blob" aria-hidden="true"></div>
 <main class="wrap">
-  <div class="me"><div class="av">ER</div><div><b>Elmurod Raimbayev</b><span>Xususiy maktab marketingi</span></div></div>
+  <div class="logo">ELMUROD<br>RAIMBAYEV<i>.</i></div>
 
-  <div class="tag">▶ BEPUL VIDEO DARSLIK</div>
-  <h1>Marketing strategiyasini <span class="hl" style="white-space:nowrap">0 dan tuzish</span></h1>
+  <div class="tag">BEPUL VIDEO DARSLIK</div>
+  <h1><span class="p">Marketing</span><span class="bx">strategiyasini</span><span class="bar">0 DAN TUZISH</span></h1>
   <p class="sub">To‘g‘ri ketma-ketlikni bilsangiz, strategiya tuzish uchun <b>10 yillik tajriba shart emas</b>. Videoda <b>11 ta bosqichni</b> real keys orqali ko‘rsataman.</p>
 
-  <a class="vid go" href="#" aria-label="Video darslikni ko'rish">
-    <div class="scr ph">
-      <img src="cover.jpg" alt="0 dan marketing strategiyasi tuzish — video darslik" width="960" height="540">
-      <div class="pb"><svg viewBox="0 0 24 24"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z" fill="#141414"/></svg></div>
-    </div>
-    <div class="tr"><i></i></div>
-  </a>
+  <div class="vwrap">
+    <a class="vid go" href="#" aria-label="Video darslikni ko'rish">
+      <div class="scr">
+        <img src="cover.jpg" alt="0 dan marketing strategiyasi tuzish — video darslik" width="960" height="540">
+        <div class="pb"><svg viewBox="0 0 24 24"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z" fill="#fff"/></svg></div>
+      </div>
+    </a>
+  </div>
 
   <div class="stats">
-    <div class="st y"><div class="v">11</div><div class="k">bosqich — to‘g‘ri ketma-ketlikda</div></div>
+    <div class="st b"><div class="v">11</div><div class="k">bosqich — to‘g‘ri ketma-ketlikda</div></div>
     <div class="st"><div class="v">0</div><div class="k">so‘m — mutlaqo bepul</div></div>
     <div class="st"><div class="v">1</div><div class="k">real keys — nazariya emas</div></div>
   </div>
@@ -95,7 +98,9 @@
     <span>Har bir bosqich shu keys misolida — qaysi qadam nima uchun qilingani bilan.</span>
   </div>
 
-  <a class="cta go" href="#"><svg viewBox="0 0 24 24"><path fill="#FFE24A" d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9-8.2c.4-.4-.1-.6-.6-.2L6.3 13 1.5 11.5c-1-.3-1.1-1 .2-1.5L20.6 2.8c.9-.3 1.6.2 1.3 1.5z"/></svg>Bepul ko’rish →</a>
+  <div class="q"><div class="l">Raqobatchilaringiz allaqachon strategiya bilan ishlayapti.<b>SIZ-CHI</b></div><div class="m">?</div></div>
+
+  <a class="cta go" href="#"><svg viewBox="0 0 24 24"><path fill="#fff" d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9-8.2c.4-.4-.1-.6-.6-.2L6.3 13 1.5 11.5c-1-.3-1.1-1 .2-1.5L20.6 2.8c.9-.3 1.6.2 1.3 1.5z"/></svg>Bepul ko’rish →</a>
   <div class="ok">✓ Bepul · ✓ Telegram orqali · ✓ Xususiy maktab va o‘quv markazlar uchun</div>
 
   <div class="ft">© Elmurod Raimbayev · Xususiy maktab marketingi</div>
