@@ -60,7 +60,7 @@ const OFFERS = {
       "▶️ <a href=\"https://youtu.be/GqbNQrQZgDQ\">Videoni ko'rish</a>\n\n" +
       "<b>Videoda nimalar bor:</b>\n" +
       "▫️ Marketing strategiyasini tuzishning 11 ta bosqichi — to'g'ri ketma-ketlikda\n" +
-      "▫️ Real keys: Registon maktabining Buxoro bozoriga kirib borishi\n" +
+      "▫️ Real keys: xususiy maktabning yangi bozorga kirib borishi\n" +
       "▫️ Har bir bosqich nazariya emas, shu keys misolida ko'rsatilgan\n\n" +
       "Strategiya tuzish uchun 10 yillik tajriba shart emas — to'g'ri ketma-ketlikni bilish kifoya.\n\n" +
       "🎁 Qo'shimcha: «Xususiy maktabga marketing strategiyasi tuzish» kitobchasi — " +
