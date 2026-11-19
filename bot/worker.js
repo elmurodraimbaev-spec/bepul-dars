@@ -231,14 +231,22 @@ async function admin(env, uid, text) {
 }
 
 // Statistika (KV) xatosi — masalan, kunlik yozish limiti tugasa — bot javobini to'xtatmasligi kerak
-// Xato bo'lsa adminga kuniga bir marta xabar beradi (har bir Worker nusxasidan ko'pi bilan bittadan)
+// Xato bo'lsa adminga kuniga BIR marta xabar beradi.
+// Bazaga yozib bo'lmagani uchun "bugun yuborildi" belgisi Telegram'da saqlanadi:
+// ogohlantirish admin chatida pin qilinadi, keyingi safar pin'dagi sana tekshiriladi.
 let alerted = "";
 async function kvAlert(env, e) {
   console.log("kv error", e && e.message || e);
   const d = day();
   if (alerted === d) return;
   alerted = d;
-  try { await tg(env, "sendMessage", { chat_id: ADMIN_ID, text: "Diqqat: bot statistikani bazaga yoza olmadi (ehtimol, kunlik KV limiti tugadi). Bot ishlashda davom etyapti, material yuborilyapti. Statistika ertaga 05:00 dan yana sanaladi.\n\nXato: " + String(e && e.message || e).slice(0, 200) }); } catch {}
+  try {
+    const c = await tg(env, "getChat", { chat_id: ADMIN_ID });
+    const pin = c.ok && c.result.pinned_message;
+    if (pin && (pin.text || "").includes(d)) return;
+    const m = await tg(env, "sendMessage", { chat_id: ADMIN_ID, text: `Diqqat (${d}): bot statistikani bazaga yoza olmadi (ehtimol, kunlik KV limiti tugadi). Bot ishlashda davom etyapti, material yuborilyapti. Statistika ertaga 05:00 dan yana sanaladi.\n\nXato: ` + String(e && e.message || e).slice(0, 200) });
+    if (m.ok) await tg(env, "pinChatMessage", { chat_id: ADMIN_ID, message_id: m.result.message_id, disable_notification: true });
+  } catch {}
 }
 const safe = (p, env) => p.catch(e => kvAlert(env, e));
 
