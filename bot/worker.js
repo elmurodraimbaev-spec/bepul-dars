@@ -7,6 +7,7 @@
  *     https://t.me/<bot>?start=kitobcha         → kitobcha
  *     https://t.me/<bot>?start=video-landing    → video darslik, manba "landing"
  *     https://t.me/<bot>?start=strategiya-landing → «0 dan marketing strategiyasi» video, manba "landing"
+ *     https://t.me/<bot>?start=kurs-landing       → «Marketing asoslari» mini kursi (21 dars), manba "landing"
  * Havola formati:  start=<taklif>[-<manba>]   (faqat harf, raqam, _ va -)
  *
  * Ishlash tartibi:
@@ -65,6 +66,37 @@ const OFFERS = {
       "Strategiya tuzish uchun 10 yillik tajriba shart emas — to'g'ri ketma-ketlikni bilish kifoya.\n\n" +
       "🎁 Qo'shimcha: «Xususiy maktabga marketing strategiyasi tuzish» kitobchasi — " +
       "<a href=\"https://t.me/raimbaev_elmurod/1948\">shu yerda</a>.",
+  },
+  kurs: {
+    post: 1862,
+    title: "«Marketing asoslari» bepul mini kursi (21 ta dars)",
+    text:
+      "🎓 <b>Marketing asoslari mini kursi (21 ta dars)</b>\n\n" +
+      [
+        ["0 dan Marketing strategiyasi tuzish", 1862],
+        ["Kompaniyani audit qilish uchun tayyor Brifing savollari", 1829],
+        ["Mijozlar tadqiqoti", 1843],
+        ["Mijozlar tadqiqoti uchun shablon", 1819],
+        ["CustDevni to'g'ri o'tkazish", 1884],
+        ["JTBD bo'yicha qo'llanma", 1993],
+        ["Bozorni o'rganish", 1995],
+        ["CJM tuzish uchun tayyor shablon", 1815],
+        ["Raqobatchilar tahlili", 1846],
+        ["Bepul marketing qilishning 50 ta instrumenti", 1859],
+        ["Kontent marketing", 1878],
+        ["Internet sotuv varonkasi", 1826],
+        ["Lid magnit", 1881],
+        ["Taklif/offer yaratish", 1833],
+        ["Reklama samarasini oshiruvchi trigerlar", 1840],
+        ["Blogerlar bilan ishlash", 1897],
+        ["Product yaratish ketma-ketligi", 1823],
+        ["PR kompaniyasi case study", 1985],
+        ["Xususiy maktabga o'quvchi yig'ish", 1951],
+        ["Xususiy maktab marketingi bo'yicha kitobcha", 1948],
+        ["Marketingning o'zgarmas qonunlari", 1902],
+      ].map(([t, p], i) => `${i + 1}-dars. ${t} 👉 https://t.me/raimbaev_elmurod/${p}`).join("\n") +
+      "\n\nPostni saqlab qo'ying va yaqinlaringizga ulashing!\n\n" +
+      "Marketingga oid foydali ma'lumotlarni o'tkazib yubormaslik uchun kanalga obuna bo'ling 👉 @raimbaev_elmurod",
   },
 };
 
