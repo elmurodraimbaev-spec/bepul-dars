@@ -167,7 +167,7 @@ async function handle(upd, env) {
   if (!offerKey || !offers[offerKey]) offerKey = (await lastOffer(env, uid)) || DEFAULT_OFFER;
 
   const member = await isMember(env, uid);
-  await safe(remember(env, uid, offerKey, src, member));   // KV xatosi javobni to'xtatmasin
+  await safe(remember(env, uid, offerKey, src, member), env);   // KV xatosi javobni to'xtatmasin
   if (member) return deliver(env, uid, offerKey);
 
   return tg(env, "sendMessage", {
@@ -202,7 +202,7 @@ async function deliver(env, uid, offerKey) {
   }
   if (!r.ok) { console.log("deliver failed", JSON.stringify(r)); await tg(env, "sendMessage", { chat_id: uid, text: `${CHANNEL_URL}/${o.post}` }); }
   await tg(env, "sendMessage", { chat_id: uid, text: T.after });
-  await safe(markGot(env, uid, offerKey));
+  await safe(markGot(env, uid, offerKey), env);
 }
 
 /* ---------- admin ---------- */
@@ -231,11 +231,20 @@ async function admin(env, uid, text) {
 }
 
 // Statistika (KV) xatosi — masalan, kunlik yozish limiti tugasa — bot javobini to'xtatmasligi kerak
-const safe = p => p.catch(e => console.log("kv error", e && e.message || e));
+// Xato bo'lsa adminga kuniga bir marta xabar beradi (har bir Worker nusxasidan ko'pi bilan bittadan)
+let alerted = "";
+async function kvAlert(env, e) {
+  console.log("kv error", e && e.message || e);
+  const d = day();
+  if (alerted === d) return;
+  alerted = d;
+  try { await tg(env, "sendMessage", { chat_id: ADMIN_ID, text: "Diqqat: bot statistikani bazaga yoza olmadi (ehtimol, kunlik KV limiti tugadi). Bot ishlashda davom etyapti, material yuborilyapti. Statistika ertaga 05:00 dan yana sanaladi.\n\nXato: " + String(e && e.message || e).slice(0, 200) }); } catch {}
+}
+const safe = (p, env) => p.catch(e => kvAlert(env, e));
 
 async function getOffers(env) {
   let extra = {};
-  try { extra = env.DB ? JSON.parse(await env.DB.get("offers") || "{}") : {}; } catch (e) { console.log("kv error", e && e.message || e); }
+  try { extra = env.DB ? JSON.parse(await env.DB.get("offers") || "{}") : {}; } catch (e) { await kvAlert(env, e); }
   return { ...OFFERS, ...extra };
 }
 
