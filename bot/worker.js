@@ -167,7 +167,7 @@ async function handle(upd, env) {
   if (!offerKey || !offers[offerKey]) offerKey = (await lastOffer(env, uid)) || DEFAULT_OFFER;
 
   const member = await isMember(env, uid);
-  await remember(env, uid, offerKey, src, member);
+  await safe(remember(env, uid, offerKey, src, member));   // KV xatosi javobni to'xtatmasin
   if (member) return deliver(env, uid, offerKey);
 
   return tg(env, "sendMessage", {
@@ -202,7 +202,7 @@ async function deliver(env, uid, offerKey) {
   }
   if (!r.ok) { console.log("deliver failed", JSON.stringify(r)); await tg(env, "sendMessage", { chat_id: uid, text: `${CHANNEL_URL}/${o.post}` }); }
   await tg(env, "sendMessage", { chat_id: uid, text: T.after });
-  await markGot(env, uid, offerKey);
+  await safe(markGot(env, uid, offerKey));
 }
 
 /* ---------- admin ---------- */
@@ -230,8 +230,12 @@ async function admin(env, uid, text) {
   return false;
 }
 
+// Statistika (KV) xatosi — masalan, kunlik yozish limiti tugasa — bot javobini to'xtatmasligi kerak
+const safe = p => p.catch(e => console.log("kv error", e && e.message || e));
+
 async function getOffers(env) {
-  const extra = env.DB ? JSON.parse(await env.DB.get("offers") || "{}") : {};
+  let extra = {};
+  try { extra = env.DB ? JSON.parse(await env.DB.get("offers") || "{}") : {}; } catch (e) { console.log("kv error", e && e.message || e); }
   return { ...OFFERS, ...extra };
 }
 
@@ -244,8 +248,10 @@ async function inc(env, key) {
 
 async function lastOffer(env, uid) {
   if (!env.DB) return null;
-  const raw = await env.DB.get("u:" + uid);
-  return raw ? JSON.parse(raw).last : null;
+  try {
+    const raw = await env.DB.get("u:" + uid);
+    return raw ? JSON.parse(raw).last : null;
+  } catch { return null; }
 }
 
 // Har bir odam faqat bir marta sanaladi. wasMember — botga kelganda allaqachon obunachi bo'lganmi.
